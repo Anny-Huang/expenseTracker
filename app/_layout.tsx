@@ -10,12 +10,12 @@ import { useColorScheme } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
+  ErrorBoundary
 } from 'expo-router';
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'login',
+  initialRouteName: 'welcome',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -51,8 +51,22 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="login" /> 
+        {/* Auth / Onboarding */}
+        <Stack.Screen name="welcome" options={{ headerShown: false }} /> 
+        <Stack.Screen name="login" options={{ headerShown: false }} /> 
+        <Stack.Screen name="create-account" options={{ headerShown: false }} /> 
+        {/* Main app tabs */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* Global Modals */}
+        <Stack.Screen
+          name="review-edit"
+          options={{ presentation: 'modal', title: 'Review & Edit' }}
+        />
+        <Stack.Screen
+          name="expense-detail"
+          options={{ presentation: 'modal', title: 'Expense Detail' }}
+        />
+         {/* Default example modal */}
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

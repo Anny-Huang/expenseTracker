@@ -1,14 +1,17 @@
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
+import { useRouter } from 'expo-router';
 
-export default function TabTwoScreen() {
+export default function CreateAccountScreen() {
+
+   const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>Create New Account</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+      <Button title="Logout" onPress={() => router.replace('/login')} />
     </View>
   );
 }
@@ -29,3 +32,5 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
+
+
