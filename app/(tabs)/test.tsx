@@ -6,6 +6,10 @@ import Colors from "@/constants/Colors";
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, StyleSheet, useColorScheme } from "react-native";
 
+import DetailRow from "@/components/dashboard/DetailRow";
+import SummaryCard from "@/components/dashboard/SummaryCard";
+import TransactionHeader from "@/components/dashboard/TransactionHeader";
+
 export default function TestScreen() {
   const router = useRouter();
   const scheme = (useColorScheme() ?? "light") as "light" | "dark";
@@ -38,17 +42,17 @@ export default function TestScreen() {
       {/* ======================= */}
       <View style={[styles.box, { borderColor: C.border }]}>
         <Text style={styles.subtitle}>SummaryCard Test</Text>
-        {/* <SummaryCard title="Balance" value={5240.12} deltaText="+240 this month" /> */}
+        <SummaryCard title="Balance" value={5240.12} deltaText="+240 this month" />
       </View>
 
       <View style={[styles.box, { borderColor: C.border }]}>
         <Text style={styles.subtitle}>TransactionHeader Test</Text>
-        {/* <TransactionHeader merchant="Whole Foods Market" date="2024-06-15" total={56.24} verified /> */}
+        <TransactionHeader merchant="Whole Foods Market" date="2024-06-15" total={56.24} verified />
       </View>
 
       <View style={[styles.box, { borderColor: C.border }]}>
         <Text style={styles.subtitle}>DetailRow Test</Text>
-        {/* <DetailRow label="Payment Method" value="Credit Card (****4521)" /> */}
+        <DetailRow label="Payment Method" value="Credit Card (****4521)" />
       </View>
 
       {/* ======================= */}
