@@ -1,4 +1,7 @@
+import ItemRow from "@/components/ItemRow";
+import SectionTitle from "@/components/SectionTitle";
 import { Text, View } from "@/components/Themed";
+import TransactionCard from "@/components/TransactionCard";
 import Colors from "@/constants/Colors";
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, StyleSheet, useColorScheme } from "react-native";
@@ -17,17 +20,17 @@ export default function TestScreen() {
       {/* ======================= */}
       <View style={[styles.box, { borderColor: C.border }]}>
         <Text style={styles.subtitle}>TransactionCard Test</Text>
-        {/* <TransactionCard merchant="Starbucks" date="2024-06-15" total={-13.0} category="Food & Drink" /> */}
+        <TransactionCard merchant="Starbucks" date="2024-10-01" total={-13.0} category="Food & Drink" />
       </View>
 
       <View style={[styles.box, { borderColor: C.border }]}>
         <Text style={styles.subtitle}>ItemRow Test</Text>
-        {/* <ItemRow name="Latte" qty={1} price={5.0} /> */}
+        <ItemRow name="Latte" qty={1} price={5.0} />
       </View>
 
       <View style={[styles.box, { borderColor: C.border }]}>
         <Text style={styles.subtitle}>SectionTitle Test</Text>
-        {/* <SectionTitle title="Receipt Details" /> */}
+        <SectionTitle title="Receipt Details" />
       </View>
 
       {/* ======================= */}
