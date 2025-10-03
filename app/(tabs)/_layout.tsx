@@ -1,44 +1,56 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Colors from "@/constants/Colors";
 import { Link, Tabs } from "expo-router";
 import React from "react";
-import { Pressable } from "react-native";
+import { Pressable, useColorScheme } from "react-native";
 
-import Colors from "@/constants/Colors";
-import { useColorScheme } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+function FeatherIcon({
+  name,
+  color,
+  size = 22,
+}: {
+  name: React.ComponentProps<typeof Feather>["name"];
   color: string;
+  size?: number;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <Feather name={name} size={size} color={color} style={{ marginBottom: -2 }} />;
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const scheme = (useColorScheme() ?? "light") as "light" | "dark";
+  const palette = Colors?.[scheme] ?? Colors.light;
+
+  const active = palette?.tint ?? "#2f6fed";
+  const inactive = palette?.tabIconDefault ?? "#9CA3AF";
+  const headerText = palette?.text ?? (scheme === "dark" ? "#fff" : "#111");
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-
         headerShown: true,
+        tabBarActiveTintColor: active,
+        tabBarInactiveTintColor: inactive,
+        tabBarLabelStyle: { fontSize: 11, fontWeight: "600" },
+        tabBarStyle: { height: 60 },
+        headerTitleStyle: { fontWeight: "700" },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <FeatherIcon name="home" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
-              <Pressable>
+              <Pressable accessibilityRole="button" accessibilityLabel="Open info" hitSlop={10}>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? "light"].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  <Feather
+                    name="info"
+                    size={20}
+                    color={headerText}
+                    style={{ marginRight: 16, opacity: pressed ? 0.6 : 1 }}
                   />
                 )}
               </Pressable>
@@ -46,32 +58,38 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="capture"
         options={{
           title: "Capture",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <FeatherIcon name="camera" color={color} />,
         }}
       />
+
       <Tabs.Screen
         name="insights"
         options={{
-          title: "Insight",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Insights",
+          tabBarIcon: ({ color }) => <FeatherIcon name="bar-chart-2" color={color} />,
         }}
       />
+
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Settings",
+          tabBarIcon: ({ color }) => <FeatherIcon name="settings" color={color} />,
         }}
       />
+
       <Tabs.Screen
         name="test"
         options={{
           title: "Test",
-          tabBarIcon: ({ color }) => <TabBarIcon name="flask" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="flask" size={22} color={color} style={{ marginBottom: -2 }} />
+          ),
         }}
       />
     </Tabs>
